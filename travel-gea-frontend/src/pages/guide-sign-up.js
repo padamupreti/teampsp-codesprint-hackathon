@@ -38,7 +38,7 @@ function GuideSignUp() {
                 const data = await res.json()
                 console.log(data)
                 console.log("Sign Up successful. Please login now.")
-                router.push("/login-or-signup") // redirect to login
+                router.push("/login") // redirect to login
             } else {
                 console.error("Could not login due to invalid credentials")
             }
@@ -49,7 +49,7 @@ function GuideSignUp() {
     }
 
     return (
-        <div className="w-8/10 mx-auto">
+        <div className="w-9/10 mx-auto">
             <GuideSignUpForm handleSubmit={handleGuideCreation} />
         </div>
     )

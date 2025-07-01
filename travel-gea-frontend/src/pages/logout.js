@@ -7,7 +7,7 @@ function Logout() {
     useEffect(() => {
         localStorage.setItem("jwtToken", "")
         localStorage.setItem("userData", "")
-        router.push("/login-or-signup")
+        router.push("/login")
     }, [router])
 
     return <></>
