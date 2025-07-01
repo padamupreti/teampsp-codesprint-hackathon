@@ -13,4 +13,5 @@ public class PartnerOrgDTO {
     private String contact;
     private List<String> tags;
     private String userName;
+    private String location;
 }

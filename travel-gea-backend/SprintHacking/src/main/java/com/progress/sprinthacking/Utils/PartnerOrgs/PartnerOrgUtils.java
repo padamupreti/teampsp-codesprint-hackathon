@@ -20,6 +20,7 @@ public class PartnerOrgUtils {
         dto.setDescription(partnerOrg.getDescription());
         dto.setPhoto(partnerOrg.getPhoto());
         dto.setContact(partnerOrg.getContact());
+        dto.setLocation(partnerOrg.getLocation());
         if (partnerOrg.getUser() != null) {
             dto.setUserName(partnerOrg.getUser().getUserName());
         }
@@ -41,6 +42,7 @@ public class PartnerOrgUtils {
         partnerOrg.setPhoto(requestDTO.getPhoto());
         partnerOrg.setContact(requestDTO.getContact());
         partnerOrg.setUser(user);
+        partnerOrg.setLocation(requestDTO.getLocation());
 
         // Convert List to comma-separated string
         if (requestDTO.getTags() != null && !requestDTO.getTags().isEmpty()) {
