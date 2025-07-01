@@ -1,4 +1,4 @@
-function TouristSignUpForm({ handleSubmit }) {
+function GuideSignUpForm({ handleSubmit }) {
     return (
         <form method="POST" className="mt-2" onSubmit={handleSubmit}>
             <div className="mb-5">
@@ -10,7 +10,7 @@ function TouristSignUpForm({ handleSubmit }) {
                 </label>
                 <input
                     type="text"
-                    name="touristName"
+                    name="guideName"
                     id="signup-fullname"
                     required
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -18,14 +18,58 @@ function TouristSignUpForm({ handleSubmit }) {
             </div>
             <div className="mb-5">
                 <label
-                    htmlFor="signup-interests"
+                    htmlFor="signup-phone"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                    Choose your interests
+                    Phone
+                </label>
+                <input
+                    type="tel"
+                    name="guidePhone"
+                    id="signup-phone"
+                    required
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+            </div>
+            {/* <div className="mb-5">
+                <label
+                    htmlFor="signup-photo"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                    Photo
+                </label>
+                <input
+                    type="tel"
+                    name="guideImageUrl"
+                    id="signup-photo"
+                    required
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+            </div> */}
+            <div className="mb-5">
+                <label
+                    htmlFor="signup-description"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                    Description
+                </label>
+                <textarea
+                    name="guideDescription"
+                    id="signup-description"
+                    required
+                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+            </div>
+            <div className="mb-5">
+                <label
+                    htmlFor="signup-specialities"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                    Choose your Specialities
                 </label>
                 <select
-                    name="interests"
-                    id="signup-interests"
+                    name="specialities"
+                    id="signup-specialities"
                     multiple
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
@@ -35,20 +79,6 @@ function TouristSignUpForm({ handleSubmit }) {
                     <option value="music">Music</option>
                     <option value="history">History</option>
                 </select>
-            </div>
-            <div className="mb-5">
-                <label
-                    htmlFor="signup-description"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                    About you
-                </label>
-                <textarea
-                    name="touristDescription"
-                    id="signup-description"
-                    required
-                    className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
             </div>
             <div className="mb-5">
                 <label
@@ -105,4 +135,4 @@ function TouristSignUpForm({ handleSubmit }) {
     )
 }
 
-export default TouristSignUpForm
+export default GuideSignUpForm

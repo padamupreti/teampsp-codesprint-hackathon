@@ -1,40 +1,39 @@
 import { useRouter } from "next/router"
 
-import TouristSignUpForm from "@/components/TouristSignUpForm"
+import GuideSignUpForm from "@/components/GuideSignUpForm"
 
-function TouristSignUp() {
+function GuideSignUp() {
     const router = useRouter()
 
-    async function handleTouristCreation(e) {
+    async function handleGuideCreation(e) {
         e.preventDefault()
 
         const formData = new FormData(e.currentTarget)
-
-        const touristName = formData.get("touristName")
-        const touristDescription = formData.get("touristDescription")
-        const interests = formData.getAll("interests")
+        const guideName = formData.get("guideName")
+        const guidePhone = formData.get("guidePhone")
+        const guideDescription = formData.get("guideDescription")
+        const specialities = formData.getAll("specialities")
         const email = formData.get("email")
         const userName = formData.get("userName")
         const password = formData.get("password")
 
         const requestData = {
-            touristName,
-            touristDescription,
-            interests,
+            guideName,
+            guidePhone,
+            guideImageUrl: "whatever",
+            guideDescription,
+            specialities,
             email,
             userName,
             password,
         }
 
         try {
-            const res = await fetch(
-                "http://localhost:9030/api/tourist/create",
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(requestData),
-                }
-            )
+            const res = await fetch("http://localhost:9030/api/guide/create", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData),
+            })
             if (res.ok) {
                 const data = await res.json()
                 console.log(data)
@@ -51,9 +50,9 @@ function TouristSignUp() {
 
     return (
         <div className="w-8/10 mx-auto">
-            <TouristSignUpForm handleSubmit={handleTouristCreation} />
+            <GuideSignUpForm handleSubmit={handleGuideCreation} />
         </div>
     )
 }
 
-export default TouristSignUp
+export default GuideSignUp
