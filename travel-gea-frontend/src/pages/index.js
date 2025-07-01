@@ -1,3 +1,4 @@
+import GuideCard from "@/components/GuideCard"
 import { useEffect, useState } from "react"
 
 function Home() {
@@ -9,13 +10,23 @@ function Home() {
     }, [])
 
     return (
-        <div className="grid place-items-center h-full w-full">
-            {user && (
-                <span className="text-2xl font-bold">
-                    Hello {user.detail.userName}
-                </span>
-            )}
-        </div>
+        <>
+            <div className="">
+                {user && (
+                    <span className="text-2xl font-bold">
+                        Hello {user.detail.userName}
+                    </span>
+                )}
+            </div>
+            <h2 className="font-bold text-2xl mb-4">Guides</h2>
+            <div className="grid grid-cols-3 gap-4 mb-4">
+                <GuideCard />
+                <GuideCard />
+                <GuideCard />
+            </div>
+            <h2 className="font-bold text-2xl mb-4">Events</h2>
+            <div className="grid grid-cols-3 gap-4 mb-4"></div>
+        </>
     )
 }
 
