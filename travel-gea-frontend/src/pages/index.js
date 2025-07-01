@@ -1,3 +1,4 @@
+import EventCard from "@/components/EventCard"
 import GuideCard from "@/components/GuideCard"
 import { useEffect, useState } from "react"
 
@@ -25,7 +26,11 @@ function Home() {
                 <GuideCard />
             </div>
             <h2 className="font-bold text-2xl mb-4">Events</h2>
-            <div className="grid grid-cols-3 gap-4 mb-4"></div>
+            <div className="grid grid-cols-3 gap-4 mb-4">
+                <EventCard />
+                <EventCard />
+                <EventCard />
+            </div>
         </>
     )
 }
