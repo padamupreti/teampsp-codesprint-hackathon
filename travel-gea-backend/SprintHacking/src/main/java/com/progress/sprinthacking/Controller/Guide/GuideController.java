@@ -2,16 +2,8 @@ package com.progress.sprinthacking.Controller.Guide;
 
 import com.progress.sprinthacking.DTO.GuideDTO;
 import com.progress.sprinthacking.DTO.ResponseDTO;
-import com.progress.sprinthacking.DTO.RoleDTO;
-import com.progress.sprinthacking.DTO.UserDTO;
 import com.progress.sprinthacking.DTO.guide.GuideRequestDTO;
-import com.progress.sprinthacking.Entity.Role;
-import com.progress.sprinthacking.Entity.User;
-import com.progress.sprinthacking.Repo.GuideRepo;
-import com.progress.sprinthacking.Repo.RoleRepo;
 import com.progress.sprinthacking.Services.Impl.IGuideService;
-import com.progress.sprinthacking.Services.Impl.IUserService;
-import com.progress.sprinthacking.Services.Role.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,40 +18,12 @@ public class GuideController {
     @Autowired
     private IGuideService guideService;
 
-    @Autowired
-    private IUserService userService;
-    @Autowired
-    private RoleRepo roleRepo;
-    @Autowired
-    private GuideRepo guideRepo;
-    @Autowired
-    private RoleService roleService;
-
     @PostMapping("/create")
-    public ResponseEntity<GuideDTO> createGuide(@RequestBody GuideRequestDTO guideDTO) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUserName(guideDTO.getUserName());
-        userDTO.setPassword(guideDTO.getPassword());
-        userDTO.setEmail(guideDTO.getEmail());
-        Role role = roleRepo.findByRoleAlias("GUIDE");
-        if (role == null) {
-            RoleDTO roleDTO = new RoleDTO();
-            roleDTO.setRoleName("GUIDE");
-            roleDTO.setRoleAlias("GUIDE");
-            roleDTO.setRemarks("GUIDE");
-            role = roleService.createRole(roleDTO);
-        }
-        userDTO.setRoleId(roleRepo.findByRoleAlias("GUIDE").getId());
-        User user = userService.createUser(userDTO);
-        GuideDTO guideDTO1 = new GuideDTO();
-        guideDTO1.setUserName(user.getUserName());
-        guideDTO1.setGuideDescription(guideDTO.getGuideDescription());
-        guideDTO1.setGuideName(guideDTO.getGuideName());
-        guideDTO1.setGuidePhone(guideDTO.getGuidePhone());
-        guideDTO1.setGuideImageUrl(guideDTO.getGuideImageUrl());
-        guideDTO1.setSpecialities(guideDTO.getSpecialities());
-        GuideDTO createdGuide = guideService.createGuide(guideDTO1, user);
-        return new ResponseEntity<>(createdGuide, HttpStatus.CREATED);
+    public ResponseEntity<ResponseDTO> createGuide(@RequestBody GuideRequestDTO guideRequestDTO) {
+        // Delegate the entire complex operation to the service
+        GuideDTO createdGuide = guideService.createGuide(guideRequestDTO);
+        Map<String, Object> response = Map.of("guide", createdGuide);
+        return new ResponseEntity<>(ResponseDTO.success("Guide created successfully", response), HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
@@ -73,21 +37,19 @@ public class GuideController {
     public ResponseEntity<ResponseDTO> getGuideById(@PathVariable Long id) {
         GuideDTO guide = guideService.getGuideById(id);
         Map<String, Object> response = Map.of("guide", guide);
-        return new ResponseEntity<>(ResponseDTO.success("Guides retrieved successfully", response), HttpStatus.OK);
+        return new ResponseEntity<>(ResponseDTO.success("Guide retrieved successfully", response), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ResponseDTO> updateGuide(@PathVariable Long id, @RequestBody GuideDTO guideDTO) {
-        guideDTO.setId(id); // Ensure the ID from the path is used
-        User existingUser = guideRepo.getById(id).getUser();
-        GuideDTO updatedGuide = guideService.updateGuide(guideDTO, existingUser);
+        GuideDTO updatedGuide = guideService.updateGuide(id, guideDTO);
         Map<String, Object> response = Map.of("guide", updatedGuide);
-        return new ResponseEntity<>(ResponseDTO.success("Guides retrieved successfully", response), HttpStatus.OK);
+        return new ResponseEntity<>(ResponseDTO.success("Guide updated successfully", response), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ResponseDTO> deleteGuide(@PathVariable Long id) {
-        boolean deletedGuide = guideService.deleteGuide(id);
-        return new ResponseEntity<>(ResponseDTO.success("Guide deleted successfully"), deletedGuide ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+        guideService.deleteGuide(id);
+        return new ResponseEntity<>(ResponseDTO.success("Guide deleted successfully"), HttpStatus.OK);
     }
 }
