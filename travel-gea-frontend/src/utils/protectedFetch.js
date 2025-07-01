@@ -1,7 +1,7 @@
-const fetchProtectedData = async (url, router, method = "GET", body = null) => {
+const fetchProtectedData = async (url, method = "GET", body = null) => {
     const token = localStorage.getItem("jwtToken")
     if (!token) {
-        router.push("/login-or-signup")
+        return null
     }
 
     const options = {
@@ -22,7 +22,7 @@ const fetchProtectedData = async (url, router, method = "GET", body = null) => {
             return await res.json()
         } else {
             console.error("Could not fetch protected data due to invalid token")
-            router.push("/login-or-signup")
+            return null
         }
     } catch (error) {
         console.error(error)

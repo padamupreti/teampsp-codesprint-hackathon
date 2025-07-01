@@ -21,7 +21,7 @@ function LoginOrSignUP() {
             })
             if (res.ok) {
                 const data = await res.json()
-                localStorage.setItem("userData", data)
+                localStorage.setItem("userData", JSON.stringify(data))
                 localStorage.setItem("jwtToken", data.detail.token)
                 router.push("/")
             } else {
@@ -58,7 +58,7 @@ function LoginOrSignUP() {
                 console.log(data)
                 console.log("Sign Up successful. Please login now.")
             } else {
-                console.log("Could not sign up due to invalid credentials")
+                console.error("Could not sign up due to invalid credentials")
             }
         } catch (error) {
             console.error(error)
