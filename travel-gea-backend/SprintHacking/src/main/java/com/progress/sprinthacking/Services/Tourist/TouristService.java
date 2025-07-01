@@ -13,6 +13,8 @@ import com.progress.sprinthacking.Repo.UserRepo;
 import com.progress.sprinthacking.Services.Impl.ITouristService;
 import com.progress.sprinthacking.Services.Users.UserService;
 import com.progress.sprinthacking.Utils.Tourist.TouristUtils;
+import dev.langchain4j.agent.tool.P;
+import dev.langchain4j.agent.tool.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -90,13 +92,15 @@ public class TouristService implements ITouristService {
     }
 
     @Override
-    public TouristDTO getTouristById(Long id) {
+    @Tool("Get a tourist by their ID")
+    public TouristDTO getTouristById(@P("tourist id") Long id) {
         Tourist tourist = touristRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("tourist not found with id: " + id));
         return touristUtils.entityToDto(tourist);
     }
 
     @Override
+    @Tool("Get all the tourists registered in the system")
     public List<TouristDTO> getAllTourists() {
         List<Tourist> tourists = touristRepo.findAll();
         return touristUtils.entityListToDtoList(tourists);

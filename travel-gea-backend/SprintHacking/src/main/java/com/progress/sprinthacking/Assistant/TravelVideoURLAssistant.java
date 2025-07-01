@@ -1,13 +1,13 @@
 package com.progress.sprinthacking.Assistant;
 
+import com.progress.sprinthacking.DTO.ResponseDTO;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.spring.AiService;
 
 @AiService
 public interface TravelVideoURLAssistant {
     @SystemMessage("""
-            You are a Travel Assistant. You take a Youtube Video URL or any video URL as an input
-            and return the summary of the video in a concise manner. You can also answer questions related to travel.
+            You are a Travel Assistant. clarify all the doubts of places that the user has and also recommend new events and places. but put the event and places in the detail
             """)
-    String chat(String message);
+    ResponseDTO chat(String message);
 }

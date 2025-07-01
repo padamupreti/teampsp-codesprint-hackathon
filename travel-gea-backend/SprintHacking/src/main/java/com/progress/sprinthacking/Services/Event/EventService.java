@@ -13,6 +13,8 @@ import com.progress.sprinthacking.Repo.PartnerOrgRepo;
 import com.progress.sprinthacking.Services.Impl.IEventService;
 import com.progress.sprinthacking.Utils.Event.EventUtils;
 import com.progress.sprinthacking.Utils.GetUserFromUserId;
+import dev.langchain4j.agent.tool.P;
+import dev.langchain4j.agent.tool.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +33,8 @@ public class EventService implements IEventService {
 
     @Override
     @Transactional
-    public EventDTO createEvent(EventRequestDTO requestDTO) {
+    @Tool("creates a new event in the system")
+    public EventDTO createEvent(@P("EventRequestDTO") EventRequestDTO requestDTO) {
         User currentUser = getUserFromUserId.getCurrentUser();
         if (currentUser == null) {
             throw new IllegalStateException("No logged-in user found. Cannot create an event.");
@@ -58,13 +61,15 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public EventDTO getEventById(Long id) {
+    @Tool("retrieves an event by its ID")
+    public EventDTO getEventById(@P("event id") Long id) {
         Event event = eventRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
         return eventUtils.entityToDto(event);
     }
 
     @Override
+    @Tool("retrieves all the events present in the system")
     public List<EventDTO> getAllEvents() {
         return eventUtils.entityListToDtoList(eventRepo.findAll());
     }
