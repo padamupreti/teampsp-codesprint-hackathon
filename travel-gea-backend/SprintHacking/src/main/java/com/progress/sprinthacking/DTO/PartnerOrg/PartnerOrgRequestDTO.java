@@ -8,6 +8,7 @@ import java.util.List;
 public class PartnerOrgRequestDTO {
     private Long id;
     private String name;
+    private String location;
     private String description;
     private String photo;
     private String contact;
