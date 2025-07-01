@@ -2,8 +2,12 @@ package com.progress.sprinthacking.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -31,4 +35,9 @@ public class Guide {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "guide", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<Reservation> reservations = new HashSet<>();
 }
