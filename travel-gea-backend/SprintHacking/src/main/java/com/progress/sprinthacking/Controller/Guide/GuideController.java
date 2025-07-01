@@ -2,13 +2,16 @@ package com.progress.sprinthacking.Controller.Guide;
 
 import com.progress.sprinthacking.DTO.GuideDTO;
 import com.progress.sprinthacking.DTO.ResponseDTO;
+import com.progress.sprinthacking.DTO.RoleDTO;
 import com.progress.sprinthacking.DTO.UserDTO;
 import com.progress.sprinthacking.DTO.guide.GuideRequestDTO;
+import com.progress.sprinthacking.Entity.Role;
 import com.progress.sprinthacking.Entity.User;
 import com.progress.sprinthacking.Repo.GuideRepo;
 import com.progress.sprinthacking.Repo.RoleRepo;
 import com.progress.sprinthacking.Services.Impl.IGuideService;
 import com.progress.sprinthacking.Services.Impl.IUserService;
+import com.progress.sprinthacking.Services.Role.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +32,8 @@ public class GuideController {
     private RoleRepo roleRepo;
     @Autowired
     private GuideRepo guideRepo;
+    @Autowired
+    private RoleService roleService;
 
     @PostMapping("/create")
     public ResponseEntity<GuideDTO> createGuide(@RequestBody GuideRequestDTO guideDTO) {
@@ -36,6 +41,14 @@ public class GuideController {
         userDTO.setUserName(guideDTO.getUserName());
         userDTO.setPassword(guideDTO.getPassword());
         userDTO.setEmail(guideDTO.getEmail());
+        Role role = roleRepo.findByRoleAlias("GUIDE");
+        if (role == null) {
+            RoleDTO roleDTO = new RoleDTO();
+            roleDTO.setRoleName("GUIDE");
+            roleDTO.setRoleAlias("GUIDE");
+            roleDTO.setRemarks("GUIDE");
+            role = roleService.createRole(roleDTO);
+        }
         userDTO.setRoleId(roleRepo.findByRoleAlias("GUIDE").getId());
         User user = userService.createUser(userDTO);
         GuideDTO guideDTO1 = new GuideDTO();
