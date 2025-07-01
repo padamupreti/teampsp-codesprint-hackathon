@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 
 import TouristSignUpForm from "@/components/TouristSignUpForm"
+import BlankLayout from "@/components/BlankLayout"
 
 function TouristSignUp() {
     const router = useRouter()
@@ -50,9 +51,12 @@ function TouristSignUp() {
     }
 
     return (
-        <div className="w-9/10 mx-auto">
-            <TouristSignUpForm handleSubmit={handleTouristCreation} />
-        </div>
+        <BlankLayout>
+            <div className="w-9/10 mx-auto">
+                <h1 className="text-3xl font-bold mb-4">Tourist Sign Up</h1>
+                <TouristSignUpForm handleSubmit={handleTouristCreation} />
+            </div>
+        </BlankLayout>
     )
 }
 

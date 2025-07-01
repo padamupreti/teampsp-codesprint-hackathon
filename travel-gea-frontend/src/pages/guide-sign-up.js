@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 
 import GuideSignUpForm from "@/components/GuideSignUpForm"
+import BlankLayout from "@/components/BlankLayout"
 
 function GuideSignUp() {
     const router = useRouter()
@@ -49,9 +50,12 @@ function GuideSignUp() {
     }
 
     return (
-        <div className="w-9/10 mx-auto">
-            <GuideSignUpForm handleSubmit={handleGuideCreation} />
-        </div>
+        <BlankLayout>
+            <div className="w-9/10 mx-auto">
+                <h1 className="text-3xl font-bold mb-4">Guide Sign Up</h1>
+                <GuideSignUpForm handleSubmit={handleGuideCreation} />
+            </div>
+        </BlankLayout>
     )
 }
 

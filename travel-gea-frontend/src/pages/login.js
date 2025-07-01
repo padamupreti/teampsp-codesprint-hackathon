@@ -2,6 +2,7 @@ import { useRouter } from "next/router"
 
 import LoginForm from "@/components/LoginForm"
 import Link from "next/link"
+import BlankLayout from "@/components/BlankLayout"
 
 function Login() {
     const router = useRouter()
@@ -34,7 +35,7 @@ function Login() {
     }
 
     return (
-        <>
+        <BlankLayout>
             <div className="w-9/10 mx-auto">
                 <h1 className="text-3xl font-bold">Login</h1>
                 <p className="my-4 text-gray-600">
@@ -45,7 +46,7 @@ function Login() {
                 </p>
                 <LoginForm handleSubmit={handleLoginSubmit} />
             </div>
-        </>
+        </BlankLayout>
     )
 }
 

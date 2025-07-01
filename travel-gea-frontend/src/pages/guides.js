@@ -2,12 +2,13 @@ import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
 
 import fetchProtectedData from "@/utils/protectedFetch"
+import Layout from "@/components/Layout"
+import GuideCardD from "@/components/GuideCardD"
 
-function ProtectedPage({ usersJson }) {
+function Guides({ usersJson }) {
     const router = useRouter()
 
-    const [users, setUsers] = useState(null)
-    // const [error, setError] = useState(false)
+    const [guides, setGuides] = useState(null)
 
     useEffect(() => {
         async function fetchUsers() {
@@ -15,22 +16,22 @@ function ProtectedPage({ usersJson }) {
                 "http://localhost:9030/api/guide/all"
             )
             console.log(resData)
-            if (resData) setUsers(resData.detail.guides)
+            if (resData) setGuides(resData.detail.guides)
             else router.push("/login")
         }
         fetchUsers()
     }, [router])
 
-    if (users) {
+    if (guides) {
         return (
-            <>
-                <h1 className="font-bold font-2xl">List of all users</h1>
-                {users.map((user) => (
-                    <div key={user.id}>{user.guideName}</div>
+            <Layout>
+                <h1 className="text-3xl font-bold mb-4">Guides</h1>
+                {guides.map((guide) => (
+                    <GuideCardD key={guide.id} guide={guide} />
                 ))}
-            </>
+            </Layout>
         )
     } else return <p>Loading ...</p>
 }
 
-export default ProtectedPage
+export default Guides

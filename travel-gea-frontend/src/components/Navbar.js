@@ -10,9 +10,7 @@ function Navbar() {
                     href="."
                     className="flex items-center space-x-3 rtl:space-x-reverse"
                 >
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-                        TravelGEA
-                    </span>
+                    <img src="/logo.webp" class="h-16" alt="Logo" />
                 </Link>
                 <button
                     data-collapse-toggle="navbar-default"
@@ -53,42 +51,10 @@ function Navbar() {
                         </li>
                         <li>
                             <Link
-                                href="/onboarding"
+                                href="/guides"
                                 className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                             >
-                                Onboarding
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/tourist-sign-up"
-                                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                            >
-                                Tourist Sign Up
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/guide-sign-up"
-                                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                            >
-                                Guide Sign Up
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/protected"
-                                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                            >
-                                Protected
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                href="/login"
-                                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                            >
-                                Login
+                                Guides
                             </Link>
                         </li>
                         <li>
