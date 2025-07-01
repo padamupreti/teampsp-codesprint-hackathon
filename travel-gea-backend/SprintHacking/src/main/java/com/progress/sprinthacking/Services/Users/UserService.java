@@ -7,6 +7,7 @@ import com.progress.sprinthacking.DTO.UserDTO;
 import com.progress.sprinthacking.Entity.Role;
 import com.progress.sprinthacking.Entity.User;
 import com.progress.sprinthacking.Enums.ResponseStatus;
+import com.progress.sprinthacking.Exception.ResourceNotFoundException;
 import com.progress.sprinthacking.Repo.RoleRepo;
 import com.progress.sprinthacking.Repo.UserRepo;
 import com.progress.sprinthacking.Services.Impl.IUserService;
@@ -44,14 +45,14 @@ public class UserService implements IUserService {
 
 
     @Override
-    public ResponseDTO createUser(UserDTO userDTO) {
+    public User createUser(UserDTO userDTO) {
         Optional<User> existingUser = userRepo.findByUserName(userDTO.getUserName());
         if (existingUser.isPresent()) {
-            return ResponseDTO.error("User already exists");
+            throw new IllegalArgumentException("User already exists with username: " + userDTO.getUserName());
         }
         Optional<Role> role = roleRepo.findById(userDTO.getRoleId());
         if(role.isEmpty()){
-            return ResponseDTO.error("Role not found");
+            throw new IllegalArgumentException("Role does not exist");
         }
         boolean emailValid = EmailValidator.isValidEmail(userDTO.getEmail());
         if (!emailValid) {
@@ -62,10 +63,8 @@ public class UserService implements IUserService {
         user.setPasswordHash(encoder.encode(userDTO.getPassword()));
         user.setRole(role.get());
         user.setEmail(userDTO.getEmail());
-        userRepo.save(user);
-        Map<String, Object> detail = new HashMap<>();
-        detail.put("user", user);
-        return ResponseDTO.success("User created successfully", detail);
+        User user1 = userRepo.save(user);
+        return user1;
     }
 
     @Override

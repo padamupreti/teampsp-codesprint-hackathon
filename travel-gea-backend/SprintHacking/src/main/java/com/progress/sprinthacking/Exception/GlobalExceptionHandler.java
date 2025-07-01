@@ -34,4 +34,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ResponseDTO.error(ex.getMessage()),
             HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ResponseDTO> handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponseDTO.error(ex.getMessage()),
+                HttpStatus.NOT_FOUND);
+    }
 }

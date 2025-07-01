@@ -3,6 +3,7 @@ package com.progress.sprinthacking.Controller;
 import com.progress.sprinthacking.DTO.LoginDTO;
 import com.progress.sprinthacking.DTO.ResponseDTO;
 import com.progress.sprinthacking.DTO.UserDTO;
+import com.progress.sprinthacking.Entity.User;
 import com.progress.sprinthacking.Services.Impl.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class LoginAndRegistration {
@@ -24,7 +28,9 @@ public class LoginAndRegistration {
 
     @PostMapping("/register")
     public ResponseEntity<ResponseDTO> register(@RequestBody UserDTO userDTO) {
-        ResponseDTO responseDTO = userService.createUser(userDTO);
-        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        User user = userService.createUser(userDTO);
+        Map<String, Object> detail = new HashMap<>();
+        detail.put("user", user);
+        return new ResponseEntity<>(ResponseDTO.success("User created successfully", detail), HttpStatus.OK);
     }
 }

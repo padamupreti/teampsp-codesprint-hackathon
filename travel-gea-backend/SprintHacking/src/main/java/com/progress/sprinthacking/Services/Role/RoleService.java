@@ -15,12 +15,11 @@ public class RoleService implements IRoleService {
     private RoleRepo roleRepo;
 
     @Override
-    public ResponseDTO createRole(RoleDTO roleDTO) {
+    public Role createRole(RoleDTO roleDTO) {
         Role roleEntity = new Role();
         roleEntity.setRoleAlias(roleDTO.getRoleAlias());
         roleEntity.setRoleName(roleDTO.getRoleName());
         roleEntity.setRemarks(roleDTO.getRemarks());
-        roleRepo.save(roleEntity);
-        return ResponseDTO.success("Role created successfully");
+        return roleRepo.save(roleEntity);
     }
 }
